@@ -28,6 +28,10 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    '@typescript-eslint/no-shadow': 'warn',
+    "import/prefer-default-export": 0,
     'prettier/prettier': [
       'error',
       {
