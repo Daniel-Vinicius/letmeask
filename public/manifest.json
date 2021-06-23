@@ -1,7 +1,7 @@
 {
   "name": "Let me Ask",
   "description": "Let me ask! App para criar e esclarecer dúvidas em tempo real.",
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#835AFD",
