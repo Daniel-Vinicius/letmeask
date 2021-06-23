@@ -5,6 +5,7 @@ import App from "./App";
 import "./services/firebase";
 
 import "./styles/global.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <React.StrictMode>
