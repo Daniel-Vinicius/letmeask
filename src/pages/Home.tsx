@@ -3,12 +3,13 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import illustrationImg from "../assets/images/illustration.svg";
-import logoImg from "../assets/images/logo.svg";
 import googleIconImg from "../assets/images/google-icon.svg";
 
 import "../styles/auth.scss";
 
 import { Button } from "../components/Button";
+import { Logo } from "../components/Logo";
+import { ToggleThemeButton } from "../components/ToggleThemeButton";
 
 import { useAuth } from "../hooks/useAuth";
 
@@ -32,7 +33,7 @@ export function Home(): JSX.Element {
     event.preventDefault();
 
     if (roomCode.trim() === "") {
-      toast.error("Digite o nome da sala!");
+      toast.error("Digite o código da sala!");
       return;
     }
 
@@ -58,7 +59,7 @@ export function Home(): JSX.Element {
       </aside>
       <main>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+          <Logo />
           <button
             className="create-room"
             type="button"
@@ -77,6 +78,9 @@ export function Home(): JSX.Element {
             />
             <Button type="submit">Entrar na sala</Button>
           </form>
+          <div className="toggleThemeContainer">
+            <ToggleThemeButton />
+          </div>
         </div>
       </main>
     </div>

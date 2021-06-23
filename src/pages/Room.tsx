@@ -1,12 +1,14 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import logoImg from "../assets/images/logo.svg";
-
 import { useAuth } from "../hooks/useAuth";
+import { useTheme } from "../hooks/useTheme";
+
 import { database } from "../services/firebase";
 
 import { Button } from "../components/Button";
+import { ToggleThemeButton } from "../components/ToggleThemeButton";
+import { Logo } from "../components/Logo";
 import { RoomCode } from "../components/RoomCode";
 
 import "../styles/room.scss";
@@ -38,11 +40,13 @@ type Question = {
 type RoomParams = { id: string };
 
 export function Room(): JSX.Element {
-  const { user, signInWithGoogle } = useAuth();
   const params = useParams<RoomParams>();
+  const { user, signInWithGoogle } = useAuth();
+  const { darkMode } = useTheme();
+
+  const [titleRoom, setTitleRoom] = useState("");
   const [newQuestion, setNewQuestion] = useState("");
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [titleRoom, setTitleRoom] = useState("");
 
   const roomId = params.id;
   const buttonSendQuestionDisabled = !user || !newQuestion;
@@ -100,15 +104,13 @@ export function Room(): JSX.Element {
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask" />
+          <Logo />
           <RoomCode code={roomId} />
         </div>
       </header>
       <main>
         <div className="room-title">
-          <h1>
-            <strong>Sala</strong> {titleRoom}
-          </h1>
+          <h1 className={darkMode ? "dark" : ""}>{titleRoom}</h1>
           <span>{questions.length} pergunta(s)</span>
         </div>
         <form onSubmit={handleSendQuestion}>
@@ -129,15 +131,22 @@ export function Room(): JSX.Element {
             ) : (
               <div className="user-info">
                 <img src={user.avatar} alt={`Foto de ${user.name}`} />
-                <span>{user.name}</span>
+                <span className={darkMode ? "dark" : ""}>{user.name}</span>
               </div>
             )}
-            <Button type="submit" disabled={buttonSendQuestionDisabled}>
+            <Button
+              id="send-question"
+              type="submit"
+              disabled={buttonSendQuestionDisabled}
+            >
               Enviar pergunta
             </Button>
           </div>
         </form>
-        {JSON.stringify(questions)}
+        <div className="toggleThemeContainer">
+          <ToggleThemeButton />
+        </div>
+        {/* {JSON.stringify(questions)} */}
       </main>
     </div>
   );

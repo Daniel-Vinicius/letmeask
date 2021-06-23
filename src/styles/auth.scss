@@ -4,6 +4,10 @@
   height: 100vh;
 
   aside {
+    @media (max-width: 700px) {
+      display: none;
+    }
+
     flex: 7;
 
     background-color: var(--purple);
@@ -20,7 +24,7 @@
     }
 
     strong {
-      font: 700 2.25rem 'Poppins', sans-serif;
+      font: 700 2.25rem "Poppins", sans-serif;
       line-height: 2.625rem;
       margin-top: 1rem;
     }
@@ -43,6 +47,12 @@
     justify-content: center;
   }
 
+  .toggleThemeContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4rem;
+  }
+
   .main-content {
     display: flex;
     flex-direction: column;
@@ -58,7 +68,7 @@
     h2 {
       font-size: 1.5rem;
       margin: 4rem 0 1.5rem;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
     }
 
     form {
@@ -74,7 +84,8 @@
         margin-top: 1rem;
       }
 
-      button, input {
+      button,
+      input {
         width: 100%;
       }
     }
@@ -94,12 +105,12 @@
       height: 3.125rem;
       border-radius: 8px;
       font-weight: 500;
-      background-color: #EA4335;
+      background-color: #ea4335;
       color: var(--white-details);
 
       display: flex;
       justify-content: center;
-      align-items:center;
+      align-items: center;
 
       border: 0;
       transition: filter 0.2s;
@@ -109,7 +120,7 @@
       }
 
       &:hover {
-        filter: brightness(0.9)
+        filter: brightness(0.9);
       }
     }
 
@@ -122,7 +133,7 @@
       align-items: center;
 
       &::before {
-        content: '';
+        content: "";
         flex: 1;
         height: 1px;
         background-color: var(--gray-medium);
@@ -130,13 +141,12 @@
       }
 
       &::after {
-        content: '';
+        content: "";
         flex: 1;
         height: 1px;
         background-color: var(--gray-medium);
         margin-left: 1rem;
       }
     }
-
   }
 }

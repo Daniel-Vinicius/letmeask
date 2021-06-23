@@ -1,4 +1,6 @@
 #page-room {
+  height: 100vh;
+
   header {
     padding: 1.5rem;
     border-bottom: 1px solid #e2e2e2;
@@ -10,6 +12,14 @@
       justify-content: space-between;
       align-items: center;
 
+      @media (max-width: 700px) {
+        justify-content: center;
+
+        > img {
+          display: none;
+        }
+      }
+
       > img {
         max-height: 2.8125rem;
       }
@@ -20,19 +30,33 @@
     max-width: 50rem;
     margin: 0 auto;
 
+    @media (max-width: 700px) {
+      margin: 0 1rem;
+    }
+
+    .toggleThemeContainer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 4rem;
+    }
+
     .room-title {
       margin: 2rem 0 1.5rem;
       display: flex;
       align-items: center;
 
+      @media (max-width: 700px) {
+        justify-content: space-between;
+      }
+
       h1 {
         font-family: "Poppins", sans-serif;
         font-size: 1.5rem;
         color: var(--black-text);
+      }
 
-        > strong {
-          color: var(--pink-dark);
-        }
+      h1.dark {
+        color: var(--white-details);
       }
 
       span {
@@ -64,9 +88,24 @@
         align-items: center;
         margin-top: 1rem;
 
+        @media (max-width: 700px) {
+          min-height: 8rem;
+          flex-direction: column;
+
+          #send-question {
+            @media (max-width: 700px) {
+              width: 90vw;
+            }
+          }
+        }
+
         .user-info {
           display: flex;
           align-items: center;
+
+          @media (max-width: 700px) {
+            margin-right: auto;
+          }
 
           img {
             width: 2rem;
@@ -78,6 +117,9 @@
             color: var(--black-text);
             font-weight: 500;
             font-size: 0.875rem;
+          }
+          span.dark {
+            color: var(--white-details);
           }
         }
 

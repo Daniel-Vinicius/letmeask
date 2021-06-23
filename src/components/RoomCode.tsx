@@ -22,7 +22,7 @@ export function RoomCode({ code }: RoomCodeProps): JSX.Element {
       <div>
         <img src={copyImg} alt="Copy room code to clipboard" />
       </div>
-      <span>Sala #{code}</span>
+      <span>#{code}</span>
     </button>
   );
 }

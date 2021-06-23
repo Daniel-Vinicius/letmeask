@@ -5,11 +5,12 @@ import { toast } from "react-toastify";
 import { useAuth } from "../hooks/useAuth";
 
 import illustrationImg from "../assets/images/illustration.svg";
-import logoImg from "../assets/images/logo.svg";
 
 import "../styles/auth.scss";
 
 import { Button } from "../components/Button";
+import { Logo } from "../components/Logo";
+import { ToggleThemeButton } from "../components/ToggleThemeButton";
 
 import { database } from "../services/firebase";
 
@@ -53,7 +54,7 @@ export function NewRoom(): JSX.Element {
       </aside>
       <main>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+          <Logo />
           <h2>Criar uma nova sala</h2>
           <form onSubmit={handleCreateRoom}>
             <input
@@ -67,6 +68,9 @@ export function NewRoom(): JSX.Element {
           <p>
             Quer entrar em uma sala existente? <Link to="/">clique aqui</Link>
           </p>
+          <div className="toggleThemeContainer">
+            <ToggleThemeButton />
+          </div>
         </div>
       </main>
     </div>
