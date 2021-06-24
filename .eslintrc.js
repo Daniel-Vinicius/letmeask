@@ -31,6 +31,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     '@typescript-eslint/no-shadow': 'warn',
+    '@typescript-eslint/naming-convention': 'warn',
+    'react/require-default-props': 'warn',
     'consistent-return': 'warn',
     'jsx-a11y/click-events-have-key-events': 'warn',
     'jsx-a11y/no-noninteractive-element-interactions': 'warn',

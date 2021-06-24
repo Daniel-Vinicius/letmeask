@@ -27,6 +27,18 @@
   --purple-hover: #6f4bd8;
 }
 
+*::-webkit-scrollbar-track {
+  background-color: var(--dracula);
+}
+
+*::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--purple);
+}
+
 @media (max-width: 1080px) {
   html {
     font-size: 93.75%;

@@ -23,6 +23,15 @@
       > img {
         max-height: 2.8125rem;
       }
+
+      > div {
+        display: flex;
+        gap: 1rem;
+
+        button {
+          height: 2.5rem;
+        }
+      }
     }
   }
 
@@ -37,7 +46,7 @@
     .toggleThemeContainer {
       display: flex;
       justify-content: flex-end;
-      margin-top: 4rem;
+      margin-top: 2rem;
     }
 
     .room-title {
@@ -138,6 +147,10 @@
           }
         }
       }
+    }
+
+    .question-list {
+      margin-top: 2rem;
     }
   }
 }

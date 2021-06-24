@@ -2,8 +2,7 @@ import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import illustrationImg from "../assets/images/illustration.svg";
-import googleIconImg from "../assets/images/google-icon.svg";
+import { illustrationImg, googleIconImg } from "../assets";
 
 import "../styles/auth.scss";
 
@@ -41,6 +40,11 @@ export function Home(): JSX.Element {
 
     if (!roomRef.exists()) {
       toast.error("Sala não encontrada!");
+      return;
+    }
+
+    if (roomRef.val().endedAt) {
+      toast.error("A sala já foi encerrada pelo administrador!");
       return;
     }
 
