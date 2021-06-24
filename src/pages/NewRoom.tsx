@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { useAuth } from "../hooks/useAuth";
@@ -15,7 +15,6 @@ import { ToggleThemeButton } from "../components/ToggleThemeButton";
 import { database } from "../services/firebase";
 
 export function NewRoom(): JSX.Element {
-  const history = useHistory();
   const { user } = useAuth();
 
   const [newRoom, setNewRoom] = useState("");
@@ -39,7 +38,7 @@ export function NewRoom(): JSX.Element {
       authorId: user.id,
     });
 
-    history.push(`/rooms/${firebaseRoom.key}`);
+    window.location.href = `/admin/rooms/${firebaseRoom.key}`;
   }
 
   return (

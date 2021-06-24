@@ -3,6 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import { database } from "../services/firebase";
 import { useAuth } from "./useAuth";
 
@@ -41,57 +43,69 @@ type QuestionType = {
 type UseRoomRetorn = {
   questions: QuestionType[];
   titleRoom: string;
-  authorIdRoom?: string;
+  roomAuthorId: string;
 };
 
 export function useRoom(roomId: string): UseRoomRetorn {
-  const { user } = useAuth();
   const history = useHistory();
+
+  const { user } = useAuth();
+
+  const [roomAuthorId, setRoomAuthorId] = useState("");
   const [titleRoom, setTitleRoom] = useState("");
-  const [authorIdRoom, setAuthorIdRoom] = useState("");
   const [questions, setQuestions] = useState<QuestionType[]>([]);
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
 
     roomRef.on("value", (roomCallback) => {
+      const roomExist = roomCallback.exists();
+
+      if (!roomExist) {
+        toast.error("Sala não encontrada!");
+
+        return history.replace("/");
+      }
+
       const room = roomCallback.val();
 
-      try {
-        const firebaseQuestions: FirebaseQuestions = room.questions ?? {};
+      const firebaseQuestions: FirebaseQuestions = room.questions ?? {};
 
-        const parsedQuestions = Object.entries(firebaseQuestions).map(
-          ([key, { author, content, isHighlighted, wasAnswered, likes }]) => {
-            const likeEntrie = Object.entries(likes ?? {}).find(
-              ([likeId, like]) => like.authorId === user?.id
-            );
+      const parsedQuestions = Object.entries(firebaseQuestions).map(
+        ([key, { author, content, isHighlighted, wasAnswered, likes }]) => {
+          const likeEntrie = Object.entries(likes ?? {}).find(
+            ([likeId, like]) => like.authorId === user?.id
+          );
 
-            const likeId = likeEntrie?.[0] ?? null;
+          const likeId = likeEntrie?.[0] ?? null;
 
-            return {
-              id: key,
-              content,
-              author,
-              isHighlighted,
-              wasAnswered,
-              likeCount: Object.values(likes ?? {}).length,
-              likeId,
-            };
-          }
-        );
+          return {
+            id: key,
+            content,
+            author,
+            isHighlighted,
+            wasAnswered,
+            likeCount: Object.values(likes ?? {}).length,
+            likeId,
+          };
+        }
+      );
 
-        setTitleRoom(room?.title);
-        setAuthorIdRoom(room?.authorId);
-        setQuestions(parsedQuestions);
+      if (room.endedAt) {
+        toast.error("Esta Sala já foi encerrada!");
 
-        return () => {
-          roomRef.off("value");
-        };
-      } catch (error) {
-        history.replace("/");
+        return history.replace("/");
       }
-    });
-  }, [history, roomId, user?.id]);
 
-  return { questions, titleRoom, authorIdRoom };
+      setTitleRoom(room?.title);
+      setRoomAuthorId(room?.authorId);
+      setQuestions(parsedQuestions);
+
+      return () => {
+        roomRef.off("value");
+      };
+    });
+  }, [history, roomAuthorId, roomId, user]);
+
+  return { questions, titleRoom, roomAuthorId };
 }

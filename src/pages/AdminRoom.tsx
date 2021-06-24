@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import { useTheme, useAuth, useRoom } from "../hooks";
@@ -27,7 +27,7 @@ export function AdminRoom(): JSX.Element {
 
   const { currentTheme } = useTheme();
   const { user } = useAuth();
-  const { titleRoom, questions } = useRoom(roomId);
+  const { titleRoom, roomAuthorId, questions } = useRoom(roomId);
   const [modalRemoveQuestionOpen, setModalRemoveQuestionOpen] = useState("");
   const [modalRemoveRoomOpen, setModalRemoveRoomOpen] = useState(false);
 
@@ -36,7 +36,7 @@ export function AdminRoom(): JSX.Element {
       endedAt: new Date(),
     });
 
-    history.push("/");
+    history.replace("/");
   }
 
   function handleRequestDeleteQuestion(questionId: string) {
@@ -49,6 +49,18 @@ export function AdminRoom(): JSX.Element {
       .remove();
     setModalRemoveQuestionOpen("");
   }
+
+  useEffect(() => {
+    if (user?.id && roomAuthorId) {
+      if (user?.id !== roomAuthorId) {
+        history.replace(`/rooms/${roomId}`);
+      }
+    }
+
+    if (!user?.id && roomAuthorId) {
+      history.replace(`/rooms/${roomId}`);
+    }
+  }, [history, roomAuthorId, roomId, user]);
 
   return (
     <div id="page-room">
