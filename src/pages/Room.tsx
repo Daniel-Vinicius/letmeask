@@ -42,7 +42,7 @@ type RoomParams = { id: string };
 export function Room(): JSX.Element {
   const params = useParams<RoomParams>();
   const { user, signInWithGoogle } = useAuth();
-  const { darkMode } = useTheme();
+  const { currentTheme } = useTheme();
 
   const [titleRoom, setTitleRoom] = useState("");
   const [newQuestion, setNewQuestion] = useState("");
@@ -110,7 +110,7 @@ export function Room(): JSX.Element {
       </header>
       <main>
         <div className="room-title">
-          <h1 className={darkMode ? "dark" : ""}>{titleRoom}</h1>
+          <h1 className={currentTheme === "dark" ? "dark" : ""}>{titleRoom}</h1>
           <span>{questions.length} pergunta(s)</span>
         </div>
         <form onSubmit={handleSendQuestion}>
@@ -131,7 +131,9 @@ export function Room(): JSX.Element {
             ) : (
               <div className="user-info">
                 <img src={user.avatar} alt={`Foto de ${user.name}`} />
-                <span className={darkMode ? "dark" : ""}>{user.name}</span>
+                <span className={currentTheme === "dark" ? "dark" : ""}>
+                  {user.name}
+                </span>
               </div>
             )}
             <Button
