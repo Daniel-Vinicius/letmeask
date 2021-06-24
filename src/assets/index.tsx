@@ -8,6 +8,8 @@ import likeImg from "./images/like.svg";
 import logoImgLight from "./images/logo.svg";
 import logoImgDark from "./images/logo-dark-mode.svg";
 import answerImg from "./images/answer.svg";
+import closeImg from "./images/close.svg";
+import trashRedImg from "./images/trash-red.svg";
 
 export {
   illustrationImg,
@@ -20,4 +22,6 @@ export {
   logoImgLight,
   logoImgDark,
   answerImg,
+  closeImg,
+  trashRedImg,
 };

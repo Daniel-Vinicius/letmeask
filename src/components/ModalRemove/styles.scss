@@ -1,0 +1,42 @@
+.modalRemove {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 3rem 3.5rem;
+
+  color: var(--black-text);
+
+  > h2 {
+    line-height: 2.125rem;
+    font-family: "Poppins";
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.closeImg {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  color: var(--red);
+}
+
+.description {
+  color: var(--gray-dark);
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2.625rem;
+
+  button#cancel {
+    background-color: var(--gray-light);
+    color: var(--gray-dark);
+  }
+
+  button#remove {
+    background-color: var(--red);
+  }
+}

@@ -3,5 +3,15 @@ import { Question } from "./Question";
 import { ToggleThemeButton } from "./ToggleThemeButton";
 import { Logo } from "./Logo";
 import { RoomCode } from "./RoomCode";
+import { Modal } from "./Modal";
+import { ModalRemove } from "./ModalRemove";
 
-export { Button, Question, ToggleThemeButton, Logo, RoomCode };
+export {
+  Button,
+  Question,
+  ToggleThemeButton,
+  Logo,
+  RoomCode,
+  Modal,
+  ModalRemove,
+};

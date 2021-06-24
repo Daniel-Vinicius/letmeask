@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import { useTheme, useAuth, useRoom } from "../hooks";
 
 import { database } from "../services/firebase";
 
-import { deleteImg } from "../assets";
+import { closeImg, deleteImg, trashRedImg } from "../assets";
 
 import {
   Logo,
@@ -12,6 +13,7 @@ import {
   RoomCode,
   ToggleThemeButton,
   Button,
+  ModalRemove,
 } from "../components";
 
 import "../styles/room.scss";
@@ -26,12 +28,8 @@ export function AdminRoom(): JSX.Element {
   const { currentTheme } = useTheme();
   const { user } = useAuth();
   const { titleRoom, questions } = useRoom(roomId);
-
-  // useEffect(() => {
-  //   if (authorIdRoom !== user?.id) {
-  //     history.replace("/");
-  //   }
-  // }, [authorIdRoom, history, user?.id]);
+  const [modalRemoveQuestionOpen, setModalRemoveQuestionOpen] = useState("");
+  const [modalRemoveRoomOpen, setModalRemoveRoomOpen] = useState(false);
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
@@ -41,34 +39,65 @@ export function AdminRoom(): JSX.Element {
     history.push("/");
   }
 
-  async function handleDeleteQuestion(questionId: string) {
-    // eslint-disable-next-line no-alert
-    if (window.confirm("Tem certeza que você deseja excluir essa pergunta?")) {
-      await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
-    }
+  function handleRequestDeleteQuestion(questionId: string) {
+    setModalRemoveQuestionOpen(questionId);
+  }
+
+  async function handleDeleteQuestion() {
+    await database
+      .ref(`rooms/${roomId}/questions/${modalRemoveQuestionOpen}`)
+      .remove();
+    setModalRemoveQuestionOpen("");
   }
 
   return (
     <div id="page-room">
+      <ModalRemove
+        title="Excluir pergunta"
+        description="Tem certeza que você deseja excluir esta pergunta?"
+        buttonText="Sim, excluir"
+        iconSrc={trashRedImg}
+        isOpen={Boolean(modalRemoveQuestionOpen)}
+        handleRemove={handleDeleteQuestion}
+        setIsOpen={() =>
+          setModalRemoveQuestionOpen(
+            modalRemoveQuestionOpen ? "" : modalRemoveQuestionOpen
+          )
+        }
+      />
+
+      <ModalRemove
+        title="Encerrar sala"
+        description="Tem certeza que você deseja encerrar esta sala?"
+        buttonText="Sim, encerrar"
+        iconSrc={closeImg}
+        isOpen={modalRemoveRoomOpen}
+        handleRemove={handleEndRoom}
+        setIsOpen={() => setModalRemoveRoomOpen(!modalRemoveRoomOpen)}
+      />
+
       <header>
         <div className="content">
           <Logo />
           <div>
             <RoomCode code={roomId} />
-            <Button isOutlined onClick={handleEndRoom}>
+            <Button isOutlined onClick={() => setModalRemoveRoomOpen(true)}>
               Encerrar Sala
             </Button>
           </div>
         </div>
       </header>
+
       <main>
         <div className="room-title">
           <h1 className={currentTheme === "dark" ? "dark" : ""}>{titleRoom}</h1>
           <span>{questions.length} pergunta(s)</span>
         </div>
+
         <div className="toggleThemeContainer">
           <ToggleThemeButton />
         </div>
+
         <div className="question-list">
           {questions.map((question) => (
             <Question
@@ -79,7 +108,7 @@ export function AdminRoom(): JSX.Element {
             >
               <button
                 type="button"
-                onClick={() => handleDeleteQuestion(question.id)}
+                onClick={() => handleRequestDeleteQuestion(question.id)}
               >
                 <img src={deleteImg} alt="Remover pergunta" />
               </button>
