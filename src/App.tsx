@@ -1,28 +1,17 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { Home } from "./pages/Home";
-import { NewRoom } from "./pages/NewRoom";
-import { Room } from "./pages/Room";
-import { AdminRoom } from "./pages/AdminRoom";
+import Routes from "./routes";
 
-import { AuthContextProvider } from "./contexts/AuthContext";
-import { ThemeContextProvider } from "./contexts/ThemeContext";
+import { AppProvider } from "./contexts";
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <ThemeContextProvider>
-        <AuthContextProvider>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/rooms/new" component={NewRoom} />
-            <Route path="/rooms/:id" component={Room} />
-            <Route path="/admin/rooms/:id" component={AdminRoom} />
-          </Switch>
-          <ToastContainer autoClose={5000} />
-        </AuthContextProvider>
-      </ThemeContextProvider>
+      <AppProvider>
+        <Routes />
+        <ToastContainer autoClose={5000} />
+      </AppProvider>
     </BrowserRouter>
   );
 }

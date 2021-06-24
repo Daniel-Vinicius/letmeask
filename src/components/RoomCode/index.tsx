@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
-import copyImg from "../assets/images/copy.svg";
-import "../styles/room-code.scss";
+import { copyImg } from "../../assets";
+import "./styles.scss";
 
 type RoomCodeProps = {
   code: string;

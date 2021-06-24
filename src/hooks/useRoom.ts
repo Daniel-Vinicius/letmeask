@@ -1,6 +1,8 @@
+/* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { database } from "../services/firebase";
 import { useAuth } from "./useAuth";
 
@@ -44,6 +46,7 @@ type UseRoomRetorn = {
 
 export function useRoom(roomId: string): UseRoomRetorn {
   const { user } = useAuth();
+  const history = useHistory();
   const [titleRoom, setTitleRoom] = useState("");
   const [authorIdRoom, setAuthorIdRoom] = useState("");
   const [questions, setQuestions] = useState<QuestionType[]>([]);
@@ -53,37 +56,42 @@ export function useRoom(roomId: string): UseRoomRetorn {
 
     roomRef.on("value", (roomCallback) => {
       const room = roomCallback.val();
-      const firebaseQuestions: FirebaseQuestions = room.questions ?? {};
 
-      const parsedQuestions = Object.entries(firebaseQuestions).map(
-        ([key, { author, content, isHighlighted, wasAnswered, likes }]) => {
-          const likeEntrie = Object.entries(likes ?? {}).find(
-            ([likeId, like]) => like.authorId === user?.id
-          );
+      try {
+        const firebaseQuestions: FirebaseQuestions = room.questions ?? {};
 
-          const likeId = likeEntrie?.[0] ?? null;
+        const parsedQuestions = Object.entries(firebaseQuestions).map(
+          ([key, { author, content, isHighlighted, wasAnswered, likes }]) => {
+            const likeEntrie = Object.entries(likes ?? {}).find(
+              ([likeId, like]) => like.authorId === user?.id
+            );
 
-          return {
-            id: key,
-            content,
-            author,
-            isHighlighted,
-            wasAnswered,
-            likeCount: Object.values(likes ?? {}).length,
-            likeId,
-          };
-        }
-      );
+            const likeId = likeEntrie?.[0] ?? null;
 
-      setTitleRoom(room?.title);
-      setAuthorIdRoom(room?.authorId);
-      setQuestions(parsedQuestions);
+            return {
+              id: key,
+              content,
+              author,
+              isHighlighted,
+              wasAnswered,
+              likeCount: Object.values(likes ?? {}).length,
+              likeId,
+            };
+          }
+        );
 
-      return () => {
-        roomRef.off("value");
-      };
+        setTitleRoom(room?.title);
+        setAuthorIdRoom(room?.authorId);
+        setQuestions(parsedQuestions);
+
+        return () => {
+          roomRef.off("value");
+        };
+      } catch (error) {
+        history.replace("/");
+      }
     });
-  }, [roomId, user?.id]);
+  }, [history, roomId, user?.id]);
 
   return { questions, titleRoom, authorIdRoom };
 }

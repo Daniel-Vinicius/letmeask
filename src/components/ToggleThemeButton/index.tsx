@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Toggle from "react-toggle";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "../../hooks";
 
-import "../styles/toggle-mode-button.scss";
+import "./styles.scss";
 
 export function ToggleThemeButton(): JSX.Element {
   const { currentTheme, toggleTheme } = useTheme();

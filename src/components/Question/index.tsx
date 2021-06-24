@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "../styles/question.scss";
+import "./styles.scss";
 
 type QuestionProps = {
   // eslint-disable-next-line react/require-default-props

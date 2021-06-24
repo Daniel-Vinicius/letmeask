@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 import { ButtonHTMLAttributes } from "react";
 
-import "../styles/button.scss";
+import "./styles.scss";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   // eslint-disable-next-line react/require-default-props
