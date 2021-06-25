@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -17,4 +18,23 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.register({
+  onUpdate: (registration) => {
+    const waitingServiceWorker = registration.installing;
+
+    if (waitingServiceWorker) {
+      waitingServiceWorker.addEventListener("statechange", (event) => {
+        console.log(event);
+        // @ts-ignore
+        if (event?.target?.state === "activated") {
+          window.location.reload();
+        }
+      });
+
+      waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
+    }
+  },
+  onSuccess: (registration) => {
+    console.log("Succes", registration);
+  },
+});
