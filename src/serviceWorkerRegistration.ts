@@ -64,6 +64,12 @@ function registerValidSW(swUrl: string, config?: Config) {
          // Existe uma nova atualização e ela foi instalada!
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
+
+              caches.keys().then((names) => {
+                for (let name of names)
+                caches.delete(name);
+            });
+
               // Execute callback de onUpdate
               if (config && config.onUpdate) {
                 config.onUpdate(registration);
