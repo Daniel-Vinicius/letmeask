@@ -91,6 +91,24 @@ export function useRoom(roomId: string): UseRoomRetorn {
         }
       );
 
+      const questionsSortedPerAnswered = parsedQuestions.sort(
+        (likeA, likeB) => {
+          if (likeA.wasAnswered === likeB.wasAnswered) {
+            return 0;
+          }
+
+          if (likeA.wasAnswered) {
+            return 1;
+          }
+
+          return -1;
+        }
+      );
+
+      const questionsSortedPerLikes = questionsSortedPerAnswered.sort(
+        (likeA, likeB) => likeB.likeCount - likeA.likeCount
+      );
+
       if (room.endedAt) {
         toast.error("Esta Sala já foi encerrada!");
 
@@ -99,7 +117,7 @@ export function useRoom(roomId: string): UseRoomRetorn {
 
       setTitleRoom(room?.title);
       setRoomAuthorId(room?.authorId);
-      setQuestions(parsedQuestions);
+      setQuestions(questionsSortedPerLikes);
 
       return () => {
         roomRef.off("value");

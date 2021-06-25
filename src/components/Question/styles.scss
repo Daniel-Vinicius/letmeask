@@ -8,6 +8,19 @@
     margin-top: 0.5rem;
   }
 
+  &.highlighted {
+    background-color: #f4f0ff;
+    border: 1px solid var(--purple);
+
+    footer .user-info span {
+      color: var(--black-text);
+    }
+  }
+
+  &.answered {
+    background-color: var(--gray-light);
+  }
+
   p {
     color: var(--black-text);
   }
@@ -32,6 +45,11 @@
         color: var(--gray-dark);
         font-size: 0.875rem;
       }
+    }
+
+    > div {
+      display: flex;
+      gap: 0.75rem;
     }
 
     button {
