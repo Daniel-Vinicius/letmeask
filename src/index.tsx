@@ -21,6 +21,7 @@ ReactDOM.render(
 serviceWorkerRegistration.register({
   onUpdate: (registration) => {
     const waitingServiceWorker = registration.installing;
+    console.log("update", registration);
 
     if (waitingServiceWorker) {
       waitingServiceWorker.addEventListener("statechange", (event) => {

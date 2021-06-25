@@ -42,7 +42,7 @@ export function AdminRoom(): JSX.Element {
       endedAt: new Date(),
     });
 
-    history.replace("/");
+    window.location.href = "/";
   }
 
   function handleRequestDeleteQuestion(questionId: string) {
