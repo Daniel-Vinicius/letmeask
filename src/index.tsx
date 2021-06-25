@@ -24,10 +24,7 @@ serviceWorkerRegistration.register({
 
     if (waitingServiceWorker) {
       waitingServiceWorker.addEventListener("statechange", (event) => {
-        // @ts-ignore
-        if (event?.target?.state === "activated") {
-          window.location.reload();
-        }
+        window.location.reload();
       });
 
       waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
