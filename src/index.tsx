@@ -21,11 +21,9 @@ ReactDOM.render(
 serviceWorkerRegistration.register({
   onUpdate: (registration) => {
     const waitingServiceWorker = registration.installing;
-    console.log("update", registration);
 
     if (waitingServiceWorker) {
       waitingServiceWorker.addEventListener("statechange", (event) => {
-        console.log(event);
         // @ts-ignore
         if (event?.target?.state === "activated") {
           window.location.reload();
@@ -34,8 +32,5 @@ serviceWorkerRegistration.register({
 
       waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
     }
-  },
-  onSuccess: (registration) => {
-    console.log("Succes", registration);
   },
 });
