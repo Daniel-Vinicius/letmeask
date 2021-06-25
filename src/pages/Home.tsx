@@ -75,7 +75,7 @@ export function Home(): JSX.Element {
           <form onSubmit={handleJoinRoom}>
             <input
               type="text"
-              placeholder="Digite o código da sala"
+              placeholder="TEST PWA UPDATE AUTOMATIC"
               value={roomCode}
               onChange={(event) => setRoomCode(event.target.value)}
             />
