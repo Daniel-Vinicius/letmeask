@@ -3,6 +3,7 @@
   border-radius: 0.5rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   padding: 1.5rem;
+  position: relative;
 
   & + .question {
     margin-top: 0.5rem;
@@ -50,6 +51,24 @@
     > div {
       display: flex;
       gap: 0.75rem;
+    }
+
+    .counterLikesAdm {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      bottom: auto;
+      color: var(--gray-dark);
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      cursor: default;
+      background-color: var(--pink-dark);
+      border-radius: 0.2rem;
+      padding: 0.5rem 1rem;
+      color: var(--white-details);
+      font-weight: 500;
+      font-size: 14px;
     }
 
     button {

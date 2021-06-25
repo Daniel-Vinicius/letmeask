@@ -22,6 +22,9 @@ function Modal({ isOpen, setIsOpen, children }: ModalProps): JSX.Element {
           marginRight: "-50%",
           transform: "translate(-50%, -50%)",
           backgroundColor: "var(--white-background)",
+          width: "90%",
+          maxWidth: "31.25rem",
+          minWidth: "21.875rem",
         },
         overlay: {
           backgroundColor: "var(--shadow)",

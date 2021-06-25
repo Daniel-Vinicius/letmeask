@@ -115,11 +115,14 @@ export function AdminRoom(): JSX.Element {
       <header>
         <div className="content">
           <Logo />
-          <div>
+          <div className="adm">
             <RoomCode code={roomId} />
             <Button isOutlined onClick={() => setModalRemoveRoomOpen(true)}>
               Encerrar Sala
             </Button>
+            <a id="participant" href={`/rooms/${roomId}`} target="new">
+              Ver como participante
+            </a>
           </div>
         </div>
       </header>
@@ -144,6 +147,12 @@ export function AdminRoom(): JSX.Element {
               author={question.author}
               key={question.id}
             >
+              {question.likeCount > 0 && (
+                <button type="button" className="counterLikesAdm">
+                  <span>{question.likeCount} like(s)</span>
+                </button>
+              )}
+
               <button
                 type="button"
                 onClick={() =>
