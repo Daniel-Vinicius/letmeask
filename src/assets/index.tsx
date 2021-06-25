@@ -10,6 +10,7 @@ import logoImgDark from "./images/logo-dark-mode.svg";
 import answerImg from "./images/answer.svg";
 import closeImg from "./images/close.svg";
 import trashRedImg from "./images/trash-red.svg";
+import noQuestions from "./images/no-questions.svg";
 
 export {
   illustrationImg,
@@ -24,4 +25,5 @@ export {
   answerImg,
   closeImg,
   trashRedImg,
+  noQuestions,
 };

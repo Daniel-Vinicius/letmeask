@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 
 import { useTheme, useAuth, useRoom } from "../hooks";
 
@@ -20,6 +20,7 @@ import {
   ToggleThemeButton,
   Button,
   ModalRemove,
+  NoQuestionsAuthPage,
 } from "../components";
 
 import "../styles/room.scss";
@@ -115,22 +116,29 @@ export function AdminRoom(): JSX.Element {
       <header>
         <div className="content">
           <Logo />
-          <div className="adm">
+          <div>
             <RoomCode code={roomId} />
             <Button isOutlined onClick={() => setModalRemoveRoomOpen(true)}>
               Encerrar Sala
             </Button>
-            <a id="participant" href={`/rooms/${roomId}`} target="new">
+            <Link className="see-how-mobile" to={`/rooms/${roomId}`}>
               Ver como participante
-            </a>
+            </Link>
           </div>
         </div>
       </header>
 
       <main>
         <div className="room-title">
-          <h1 className={currentTheme === "dark" ? "dark" : ""}>{titleRoom}</h1>
-          <span>{questions.length} pergunta(s)</span>
+          <div>
+            <h1 className={currentTheme === "dark" ? "dark" : ""}>
+              {titleRoom}
+            </h1>
+            <span>{questions.length} pergunta(s)</span>
+          </div>
+          <Link className="see-how" to={`/rooms/${roomId}`}>
+            Ver como participante
+          </Link>
         </div>
 
         <div className="toggleThemeContainer">
@@ -138,52 +146,59 @@ export function AdminRoom(): JSX.Element {
         </div>
 
         <div className="question-list">
-          {questions.map((question) => (
-            <Question
-              content={question.content}
-              userName={user?.name}
-              isHighlighted={question.isHighlighted}
-              wasAnswered={question.wasAnswered}
-              author={question.author}
-              key={question.id}
-            >
-              {question.likeCount > 0 && (
-                <button type="button" className="counterLikesAdm">
-                  <span>{question.likeCount} like(s)</span>
-                </button>
-              )}
-
-              <button
-                type="button"
-                onClick={() =>
-                  handleCheckQuestionAsAnswered(
-                    question.id,
-                    question.wasAnswered
-                  )
-                }
+          {questions.length >= 1 ? (
+            questions.map((question) => (
+              <Question
+                content={question.content}
+                userName={user?.name}
+                isHighlighted={question.isHighlighted}
+                wasAnswered={question.wasAnswered}
+                author={question.author}
+                key={question.id}
               >
-                <img src={checkImg} alt="Marcar pergunta como respondida" />
-              </button>
+                {question.likeCount > 0 && (
+                  <button type="button" className="counterLikesAdm">
+                    <span>{question.likeCount} like(s)</span>
+                  </button>
+                )}
 
-              {!question.wasAnswered && (
                 <button
                   type="button"
                   onClick={() =>
-                    handleHighlightQuestion(question.id, question.isHighlighted)
+                    handleCheckQuestionAsAnswered(
+                      question.id,
+                      question.wasAnswered
+                    )
                   }
                 >
-                  <img src={answerImg} alt="Dar destaque à pergunta" />
+                  <img src={checkImg} alt="Marcar pergunta como respondida" />
                 </button>
-              )}
 
-              <button
-                type="button"
-                onClick={() => handleRequestDeleteQuestion(question.id)}
-              >
-                <img src={deleteImg} alt="Remover pergunta" />
-              </button>
-            </Question>
-          ))}
+                {!question.wasAnswered && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleHighlightQuestion(
+                        question.id,
+                        question.isHighlighted
+                      )
+                    }
+                  >
+                    <img src={answerImg} alt="Dar destaque à pergunta" />
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => handleRequestDeleteQuestion(question.id)}
+                >
+                  <img src={deleteImg} alt="Remover pergunta" />
+                </button>
+              </Question>
+            ))
+          ) : (
+            <NoQuestionsAuthPage />
+          )}
         </div>
       </main>
     </div>

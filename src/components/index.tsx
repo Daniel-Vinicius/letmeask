@@ -5,6 +5,8 @@ import { Logo } from "./Logo";
 import { RoomCode } from "./RoomCode";
 import { Modal } from "./Modal";
 import { ModalRemove } from "./ModalRemove";
+import { FooterAuthPage } from "./FooterAuthPage";
+import { NoQuestionsAuthPage } from "./NoQuestionsAuthPage";
 
 export {
   Button,
@@ -14,4 +16,6 @@ export {
   RoomCode,
   Modal,
   ModalRemove,
+  FooterAuthPage,
+  NoQuestionsAuthPage,
 };

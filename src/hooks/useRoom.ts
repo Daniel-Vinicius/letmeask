@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -69,6 +67,12 @@ export function useRoom(roomId: string): UseRoomRetorn {
 
       const room = roomCallback.val();
 
+      if (room.endedAt) {
+        toast.error("Esta Sala já foi encerrada!");
+
+        return history.replace("/");
+      }
+
       const firebaseQuestions: FirebaseQuestions = room.questions ?? {};
 
       const parsedQuestions = Object.entries(firebaseQuestions).map(
@@ -108,12 +112,6 @@ export function useRoom(roomId: string): UseRoomRetorn {
           return -1;
         }
       );
-
-      if (room.endedAt) {
-        toast.error("Esta Sala já foi encerrada!");
-
-        return history.replace("/");
-      }
 
       setTitleRoom(room?.title);
       setRoomAuthorId(room?.authorId);

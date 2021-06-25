@@ -6,9 +6,7 @@ import { illustrationImg, googleIconImg } from "../assets";
 
 import "../styles/auth.scss";
 
-import { Button } from "../components/Button";
-import { Logo } from "../components/Logo";
-import { ToggleThemeButton } from "../components/ToggleThemeButton";
+import { Button, Logo, FooterAuthPage } from "../components";
 
 import { useAuth } from "../hooks/useAuth";
 
@@ -64,13 +62,14 @@ export function Home(): JSX.Element {
       <main>
         <div className="main-content">
           <Logo />
+
           <button
             className="create-room"
             type="button"
             onClick={handleCreateRoom}
           >
-            <img src={googleIconImg} alt="Logo do Google" />
-            Crie sua sala com o Google
+            {!user && <img src={googleIconImg} alt="Logo do Google" />}
+            {user ? "Criar nova sala" : "Crie sua sala com o Google"}
           </button>
           <div className="separator">ou entre em uma sala</div>
           <form onSubmit={handleJoinRoom}>
@@ -82,9 +81,7 @@ export function Home(): JSX.Element {
             />
             <Button type="submit">Entrar na sala</Button>
           </form>
-          <div className="toggleThemeContainer">
-            <ToggleThemeButton />
-          </div>
+          <FooterAuthPage />
         </div>
       </main>
     </div>

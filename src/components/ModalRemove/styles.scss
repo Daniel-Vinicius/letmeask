@@ -5,7 +5,7 @@
 
   padding: 3rem 3.5rem;
 
-  @media (max-width: 700px) {
+  @media (max-width: 43.75rem) {
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -37,7 +37,7 @@
   gap: 0.5rem;
   margin-top: 2.625rem;
 
-  @media (max-width: 700px) {
+  @media (max-width: 43.75rem) {
     flex-direction: column;
     width: 100%;
     gap: 1rem;

@@ -12,11 +12,12 @@
       justify-content: space-between;
       align-items: center;
 
-      @media (max-width: 700px) {
+      @media (max-width: 43.75rem) {
         justify-content: center;
+        flex-direction: column;
 
         > img {
-          display: none;
+          margin-bottom: 1rem;
         }
       }
 
@@ -33,8 +34,20 @@
         }
       }
 
-      > div.adm {
-        @media (max-width: 700px) {
+      .see-how-mobile {
+        color: var(--pink-dark);
+        text-decoration: underline;
+        margin: auto 0;
+        display: none;
+
+        @media (max-width: 43.75rem) {
+          display: flex;
+          margin: 0 auto;
+        }
+      }
+
+      > div {
+        @media (max-width: 43.75rem) {
           flex-direction: column;
           width: 100%;
           gap: 2rem;
@@ -43,12 +56,6 @@
             width: 100%;
             height: 3rem;
           }
-        }
-
-        #participant {
-          color: var(--pink-dark);
-          text-decoration: underline;
-          margin: auto 0;
         }
       }
 
@@ -61,7 +68,7 @@
     padding-bottom: 2rem;
 
 
-    @media (max-width: 700px) {
+    @media (max-width: 43.75rem) {
       margin: 0 1rem;
     }
 
@@ -72,11 +79,26 @@
     }
 
     .room-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .see-how {
+        color: var(--pink-dark);
+        text-decoration: underline;
+
+        @media (max-width: 43.75rem) {
+          display: none;
+        }
+      }
+
+      > div {
       margin: 2rem 0 1.5rem;
       display: flex;
       align-items: center;
 
-      @media (max-width: 700px) {
+      @media (max-width: 43.75rem) {
+        width: 100%;
         justify-content: space-between;
       }
 
@@ -84,6 +106,10 @@
         font-family: "Poppins", sans-serif;
         font-size: 1.5rem;
         color: var(--black-text);
+
+        @media (max-width: 43.75rem) {
+          max-width: 220px;
+        }
       }
 
       h1.dark {
@@ -97,8 +123,9 @@
         padding: 0.5rem 1rem;
         color: var(--white-details);
         font-weight: 500;
-        font-size: 14px;
+        font-size: 0.875rem;
       }
+    }
     }
 
     form {
@@ -119,12 +146,12 @@
         align-items: center;
         margin-top: 1rem;
 
-        @media (max-width: 700px) {
+        @media (max-width: 43.75rem) {
           min-height: 8rem;
           flex-direction: column;
 
           #send-question {
-            @media (max-width: 700px) {
+            @media (max-width: 43.75rem) {
               width: 90vw;
             }
           }
@@ -134,7 +161,7 @@
           display: flex;
           align-items: center;
 
-          @media (max-width: 700px) {
+          @media (max-width: 43.75rem) {
             margin-right: auto;
           }
 
@@ -145,12 +172,8 @@
           }
           span {
             margin-left: 0.5rem;
-            color: var(--black-text);
             font-weight: 500;
             font-size: 0.875rem;
-          }
-          span.dark {
-            color: var(--white-details);
           }
         }
 

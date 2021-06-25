@@ -1,0 +1,50 @@
+#no-user {
+  margin-top: 4rem;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+#footer-auth-page {
+  display: flex;
+  margin-top: 4rem;
+  width: 100%;
+  flex-direction: column;
+  
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+
+  .user-info {
+    display: flex;
+    align-items: center;
+  
+    @media (max-width: 43.75rem) {
+      margin-right: auto;
+    }
+  
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+    }
+    span {
+      margin-left: 0.5rem;
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+  }
+
+  button {
+    margin-top: 1rem;
+    background: transparent;
+    color: var(--pink-dark);
+    text-decoration: underline;
+    width: 6.25rem;
+    border: 0;
+  }
+  
+}

@@ -8,9 +8,7 @@ import illustrationImg from "../assets/images/illustration.svg";
 
 import "../styles/auth.scss";
 
-import { Button } from "../components/Button";
-import { Logo } from "../components/Logo";
-import { ToggleThemeButton } from "../components/ToggleThemeButton";
+import { Button, Logo, FooterAuthPage } from "../components";
 
 import { database } from "../services/firebase";
 
@@ -28,6 +26,16 @@ export function NewRoom(): JSX.Element {
 
     if (newRoom.trim() === "") {
       toast.error("Digite o nome da sala!");
+      return;
+    }
+
+    if (newRoom.length < 3) {
+      toast.error("Mínimo de 3 caracteres!");
+      return;
+    }
+
+    if (newRoom.length >= 20) {
+      toast.error("Máximo de 20 caracteres!");
       return;
     }
 
@@ -67,9 +75,7 @@ export function NewRoom(): JSX.Element {
           <p>
             Quer entrar em uma sala existente? <Link to="/">clique aqui</Link>
           </p>
-          <div className="toggleThemeContainer">
-            <ToggleThemeButton />
-          </div>
+          <FooterAuthPage />
         </div>
       </main>
     </div>
