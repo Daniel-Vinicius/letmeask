@@ -9,7 +9,7 @@ import { StaleWhileRevalidate } from 'workbox-strategies';
 
 declare const self: ServiceWorkerGlobalScope;
 
-const version = "0.9";
+const version = "0.1";
 
 clientsClaim();
 
