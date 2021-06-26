@@ -21,6 +21,7 @@ export function NewRoom(): JSX.Element {
     event.preventDefault();
 
     if (!user) {
+      toast.error("É necessário estar logado para criar uma sala!");
       return;
     }
 

@@ -53,6 +53,22 @@ Letmeask é perfeito para criadores de conteúdos poderem criar salas de Q&A com
 
 Este é um projeto desenvolvido durante a **[Next Level Week Together](https://nextlevelweek.com/)**, apresentada dos dias 20 a 27 de Junho de 2021.
 
+## 🎯 A milha extra
+
+### Eu fiz algumas coisas que acabaram ficando como desafio no último Dia da NLW Together
+
+
+
+* **PWA e Responsividade** - Transformei o projeto em uma PWA, se quiser testar abra no seu celular agora o [meu Letmeask em produção](https://letmeask-1.vercel.app/) e verá que é possível instalar como um aplicativo, (só testei no Android). O projeto está 100% Responsivo.
+
+* **Dark mode** - Apliquei um Dark mode no projeto.
+
+* **Testes End-to-End com Cypress** - Nunca tinha feito um Testes ponta a ponta até então, aproveitei pra aprender e fiz, o [coverage](https://user-images.githubusercontent.com/66279500/123524439-b5509280-d6a0-11eb-97ec-932b412dd387.png) ficou em 50%, usei o Cypress Studio e fiz o que consegui, tive um pouco de _dificuldade em mockar dados_ como o de login por exemplo.
+
+* **Melhoria de usabilidade** - A aplicação tinha algumas pontas soltas, como por exemplo quando o usuário criava uma sala não era redirecionado para a tela de administrador, ou as perguntas não eram ordenadas por likes e por se já foi respondida, não era possível alternar entre a tela de administrador e a tela de participante, não tinha modal, nem toasts, e algumas outras coisas que podiam ser melhoradas fácilmente, tudo isso que citei aqui e mais um pouco eu implementei.
+
+* **Organização da App** - Os estilos estavam todos na pasta styles, as cores não estavam em variáveis e o projeto não usava nem Eslint nem Prettier, ao invés de fazer deploy no Firebase eu fiz na vercel e como consequência o projeto já fica com o fluxo de CI/CD pronto.
+
 
 ## 🔖 Layout
 

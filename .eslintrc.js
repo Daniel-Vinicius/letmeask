@@ -3,15 +3,15 @@ module.exports = {
     'airbnb-typescript',
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jest/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    "plugin:cypress/recommended"
   ],
-  plugins: ['react', '@typescript-eslint', 'jest'
+  plugins: ['react', '@typescript-eslint', 'cypress'
   ],
   env: {
     browser: true,
     es6: true,
-    jest: true,
+    "cypress/globals": true
   },
   globals: {
     Atomics: 'readonly',
@@ -28,12 +28,14 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
+    "import/no-anonymous-default-export": "off",
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     '@typescript-eslint/no-shadow': 'warn',
     '@typescript-eslint/naming-convention': 'warn',
     'react/require-default-props': 'warn',
     'consistent-return': 'warn',
+    'import/no-extraneous-dependencies': 'off',
     'jsx-a11y/click-events-have-key-events': 'warn',
     'jsx-a11y/no-noninteractive-element-interactions': 'warn',
     "import/prefer-default-export": 0,

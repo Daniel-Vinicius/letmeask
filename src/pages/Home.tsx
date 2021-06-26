@@ -76,10 +76,13 @@ export function Home(): JSX.Element {
             <input
               type="text"
               placeholder="Digite o código da sala"
+              id="room-code"
               value={roomCode}
               onChange={(event) => setRoomCode(event.target.value)}
             />
-            <Button type="submit">Entrar na sala</Button>
+            <Button type="submit" id="join-to-room">
+              Entrar na sala
+            </Button>
           </form>
           <FooterAuthPage />
         </div>

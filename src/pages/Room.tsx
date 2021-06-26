@@ -84,7 +84,11 @@ export function Room(): JSX.Element {
           <div>
             <RoomCode code={roomId} />
             {!isAdm && (
-              <Button type="button" onClick={() => history.push("/")}>
+              <Button
+                data-cy="exit-room"
+                type="button"
+                onClick={() => history.push("/")}
+              >
                 Sair da sala
               </Button>
             )}
