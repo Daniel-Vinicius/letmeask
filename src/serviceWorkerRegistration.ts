@@ -68,6 +68,8 @@ function registerValidSW(swUrl: string, config?: Config) {
               caches.keys().then((names) => {
                 for (let name of names)
                 caches.delete(name);
+
+                window.location.reload();
             });
 
               // Execute callback de onUpdate

@@ -18,16 +18,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorkerRegistration.register({
-  onUpdate: (registration) => {
-    const waitingServiceWorker = registration.installing;
-
-    if (waitingServiceWorker) {
-      waitingServiceWorker.addEventListener("statechange", (event) => {
-        window.location.reload();
-      });
-
-      waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
-    }
-  },
-});
+serviceWorkerRegistration.register();
